@@ -2,25 +2,35 @@
     this.val = x;
     this.next = null;
 }*/
-function FindKthToTail(head, k)
-{
-    // write code here
-    if (head === null || k <= 0)  return null
+// 栈
+function FindKthToTail(head, k) {
+  // write code here
+  let stack = []
+  let ans = []
+  while(head) {
+    stack.push(head)
+    head = head.next
+  }
 
-    let pNode1 = head,
-      pNode2 = head
-    while(--k) {
-      if (pNode1.next !== null) {
-        pNode2 = pNode2.next
-      } else {
-        return null
-      }
+  while(k > 0) {
+    ans = stack.pop()
+    k--
+  }
+
+  return ans
+}
+
+// 双指针
+function FindKthToTailD(head, k) {
+  let p = head, q = head
+  while(p) {
+    if (k > 0) {
+      p = p.next
+      k--
+    } else {
+      p = p.next
+      q = p.next
     }
-
-    while(pNode2.next !== null) {
-      pNode1 = pNode1.next
-      pNode2 = pNode2.next
-    }
-
-    return pNode1
+  }
+  return q
 }
