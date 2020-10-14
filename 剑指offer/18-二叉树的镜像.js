@@ -10,7 +10,10 @@
  * @return {TreeNode}
  */
 var mirrorTree = function(root) {
-  if (!root) return null
-  [root.left, root.right] = [mirrorTree(root.right), mirrorTree(root.left)]
+  if (root == null) return null
+
+  let temp = root.left
+  root.left = mirrorTree(root.right)
+  root.right = mirrorTree(temp)
   return root
 };
